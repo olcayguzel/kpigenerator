@@ -1,0 +1,15 @@
+{
+	"InputFolder": "C:\\Odine\\Input",
+	"FileCreateInterval": 15,
+	"OutputFolder": "C:\\Odine\\Output",
+	"OutputFilePattern": "[NODE]-[TIMESTAMP]-[KIND].csv",
+	"CPSMetricInterval": 1,
+	"QueryTimeInterval": 5,
+	"CauseCodeInterval": 5,
+	"Node": "Test Node",	
+	"Type": {
+		"QueryTime": "query_times",
+		"CauseCode": "cause_codes",
+		"CpsMetric": "cpsmetrics"
+	}
+}

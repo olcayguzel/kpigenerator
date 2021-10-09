@@ -1,0 +1,73 @@
+#####################  KPI GENERATOR  ##############################
+
+DAT_FILE_NAME = "fileprocess.dat"
+DAT_FILE_FORMAT = "[DATE]|[NAME]"
+
+#####################  LOGGER  ##############################
+
+LOG_PATTERN = "[TIME] [TYPE] [MESSAGE]\n"
+LOG_FOLDER_PATH = "logs"
+MAX_LOG_FILE_SIZE = 5
+
+#####################  AGGREGATE  ##############################
+
+QUERY_TIME_KEY = "querytimes"
+CAUSE_CODE_KEY = "causecodes"
+CPS_METRIC_KEY = "cpsmetrics"
+LAST_CDR_TIME ="lastcdrtime"
+
+TIMESTAMP_REGEX = "\d+-\d+-\d+\s\d+:\d+:\d+"
+NODENAME = "Node Name"
+TIMESTAMP = "Date"
+QUERYTIME = "Query Time"
+CAUSECODE = "Code"
+CODECOUNT = "Count"
+MINCPS = "Min CPS"
+MAXCPS = "Max CPS"
+AVGCPS = "Avg CPS"
+
+QUERY_TIME_DATA_PATTERN = "[NODE],[TIMESTAMP],[AVERAGE]\n"
+CAUSE_CODE_DATA_PATTERN = "[NODE],[TIMESTAMP],[CODE],[COUNT]\n"
+CPS_METRIC_DATA_PATTERN = "[NODE],[TIMESTAMP],[MIN],[MAX],[AVG]\n"
+
+
+QUERY_TIME_TMP_DATA_PATTERN = "[NODE] [TIMESTAMP] [AVERAGE]\n"
+CAUSE_CODE_TMP_DATA_PATTERN = "[NODE] [TIMESTAMP] [CODE],[COUNT]\n"
+CPS_METRIC_TMP_DATA_PATTERN = "[NODE] [TIMESTAMP] [AVG]\n"
+
+QUERY_TIME_DATA_TITLE = "[NODE],[TIMESTAMP],[AVERAGE]\n"
+CAUSE_CODE_DATA_TITLE = "[NODE],[TIMESTAMP],[CODE],[COUNT]\n"
+CPS_METRIC_DATA_TITLE = "[NODE],[TIMESTAMP],[MIN],[MAX],[AVG]\n"
+
+TMP_FILE_NAME_PATTERN = "[TIMESTAMP]_[KIND].tmp"
+
+OT_QUERY = "query"
+OT_CODE = "code"
+OT_CPS = "cps"
+
+OUTPUT_TYPES = [OT_QUERY, OT_CODE, OT_CPS]
+
+#####################  CONFIGURATION  ##############################
+
+TYPE = "Type"
+NODE_NAME = "Node"
+INPUT_FOLDER = "InputFolder"
+OUTPUT_FOLDER = "OutputFolder"
+INPUT_PATTERN = "InputFilePattern"
+OUTPUT_PATTERN = "OutputFilePattern"
+NEW_FILE_INTERVAL = "FileCreateInterval"
+QUERY_TIME_INTERVAL = "QueryTimeInterval"
+CAUSE_CODE_INTERVAL = "CauseCodeInterval"
+CPS_METRIC_INTERVAL = "CPSMetricInterval"
+
+QUERY_TIME_KIND = "QueryTime"
+CAUSE_CODE_KIND = "CauseCode"
+CPS_METRIC_KIND = "CpsMetric"
+
+OUTPUT_FILE_PATTERN = "[NODE]_[TIMESTAMP]_[TYPE].csv"
+INPUT_FILE_PATTERN = "*.cdr"
+FILE_CREATE_INTERVAL = 15
+FILE_CREATE_WAIT_DURATION = 15
+QUERY_TIME_AGGR_INTERVAL = 5
+CAUSE_CODE_AGGR_INTERVAL = 5
+CPS_METRIC_AGGR_INTERVAL = 1
