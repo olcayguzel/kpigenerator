@@ -25,6 +25,7 @@ class Config:
         self.OutputTypes = []
         self.OnDemandProcess:bool = False
         self.Kind = Kind()
+        self.LogFolder = const.LOG_FOLDER_PATH
 
     def load(self, filename):
         fd = None
@@ -54,6 +55,8 @@ class Config:
                     self.CauseCodeInterval = data.get(const.CAUSE_CODE_INTERVAL)
                 if data.get(const.CPS_METRIC_INTERVAL):
                     self.CPSMetricInterval = data.get(const.CPS_METRIC_INTERVAL)
+                if data.get(const.LOG_FOLDER):
+                    self.LogFolder = data.get(const.LOG_FOLDER)
 
                 if data.get(const.TYPE):
                     kind = data.get(const.TYPE)
@@ -83,9 +86,11 @@ class Config:
                     self.CPSMetricInterval = args.cps_metric_interval
                 if args.node is not None:
                     self.NodeName = args.node
+                if args.log_folder is not None:
+                    self.LogFolder = args.log_folder
                 #On-Demand Process arguments
                 if args.ondemand is not None:
-                    self.OnDemandProcess = True
+                    self.OnDemandProcess = args.ondemand
                 if args.input_pattern is not None:
                     self.InputFilePattern = args.input_pattern
                 if args.output_types is not None:
@@ -147,8 +152,8 @@ class Config:
 
     def parsearguments(self):
         parser = ArgumentParser(
-            usage="python kpigenerator.py [PROCESS OPTIONS]|[TEST OPTIONS]",
-            description="Examine over cdr files and produce aggregate data ",
+            usage="python %(prog)scdraggregator.py [PROCESS OPTIONS]|[TEST OPTIONS]",
+            description="Examine over cdr files and generate aggregated data ",
             allow_abbrev=False,
             epilog= """
                 Examples:
@@ -203,6 +208,9 @@ class Config:
         test_options_group.add_argument("-ot", "--output-types", metavar="", dest="output_types", required=False, action="append", nargs="*", type=self.output_type(const.OUTPUT_TYPES),
                                         help="Indicates how many minutes the files will be created in an hour. Available only for on-demand process. Output generate for all types if omitted")
 
+        common_options_group.add_argument("-l", "--log-folder", metavar="", dest="log_folder", type=str,
+                                          required=False,
+                                          help="Folder where log files will be stored. Default: log folder in current directory ")
         common_options_group.add_argument("-qts", "--query-time-suffix", metavar="", dest="query_time_suffix", type=str,
                                           required=False,
                                           help="Suffix which will be replaced with [TYPE] variable on file name. Default: querytimes")

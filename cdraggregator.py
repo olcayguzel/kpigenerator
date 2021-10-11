@@ -181,9 +181,10 @@ def init():
     if error is not None and len(error) > 0:
         log.write(LogTypes.ERROR, error)
         sys.exit(-1)
+    log.changeoutputfolder(config.LogFolder)
     aggr.loaddatafromtemp()
     error = config.validate()
-    if config.InputFolder:
+    if config.OnDemandProcess:
         log.changeoutput(OutputTargets.FILE)
     aggr.setconfig(config, log)
     if error is  None or len(error) == 0:
@@ -196,12 +197,17 @@ def init():
         sys.exit(-1)
 
 def startondemand():
+    filecount = 0
     for path in Path(config.InputFolder).glob(config.InputFilePattern):
         queue.put(path)
+        filecount += 1
 
     if not queue.empty():
+        log.write(LogTypes.DEBUG, f"{filecount} file(s) found and enqueued")
+        print(f"{filecount} file(s) found and enqueued")
         processpendingfiles(True)
-        log.write(LogTypes.DEBUG, f"file(s) found and enqueued")
+        log.write(LogTypes.DEBUG, f"{filecount} file(s) processed. You can find log file on {config.LogFolder}")
+        print(f"{filecount} file(s) processed. You can find log file on {config.LogFolder}")
     else:
         log.write(LogTypes.ERROR, f"No file found on the folder: {config.InputFolder}. Search Param: {config.InputFilePattern}")
 

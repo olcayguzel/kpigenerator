@@ -59,6 +59,7 @@ NEW_FILE_INTERVAL = "FileCreateInterval"
 QUERY_TIME_INTERVAL = "QueryTimeInterval"
 CAUSE_CODE_INTERVAL = "CauseCodeInterval"
 CPS_METRIC_INTERVAL = "CPSMetricInterval"
+LOG_FOLDER = "LogFolder"
 
 QUERY_TIME_KIND = "QueryTime"
 CAUSE_CODE_KIND = "CauseCode"

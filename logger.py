@@ -20,7 +20,11 @@ class Logger:
 	def __init__(self):
 		self.pwd = os.getcwd()
 		self.filename = "kpigenerator.log"
+		self.__output_folder = const.LOG_FOLDER_PATH
 		self.OutputTo:OutputTargets = OutputTargets.BOTH # 0 -> FILE		1-> STD OUTPUT
+
+	def changeoutputfolder(self, folder):
+		self.__output_folder = folder
 
 	def changeoutput(self, target:OutputTargets):
 		if target == OutputTargets.STDOUTPUT:
@@ -40,7 +44,7 @@ class Logger:
 			print(ex)
 
 	def write(self, logtype:LogTypes, message):
-		self.createfolder(const.LOG_FOLDER_PATH)
+		self.createfolder(self.__output_folder)
 		now = datetime.datetime.now()
 		logtime = now.strftime("%Y-%m-%d %H:%M:%S")
 		logmessage = const.LOG_PATTERN.replace("[TIME]", logtime)
@@ -60,7 +64,7 @@ class Logger:
 				sys.stderr.buffer.flush()
 
 	def checklogfile(self):
-		path = os.path.join(self.pwd, const.LOG_FOLDER_PATH, self.filename)
+		path = os.path.join(self.pwd, self.__output_folder, self.filename)
 		if os.path.exists(path):
 			stat = os.stat(path)
 			size = 0
@@ -69,13 +73,13 @@ class Logger:
 				size = size / 1024 / 2024
 			if size >= const.MAX_LOG_FILE_SIZE:
 				now = datetime.datetime.now()
-				os.rename(path, os.path.join(self.pwd, const.LOG_FOLDER_PATH, now.strftime("%Y%m%d_%H%M%S") + ".log"))
+				os.rename(path, os.path.join(self.pwd, self.__output_folder, now.strftime("%Y%m%d_%H%M%S") + ".log"))
 
 	def writeToFile(self, message:str):
 		fd = None
 		try:
 			self.checklogfile()
-			fd = open(os.path.join(self.pwd, const.LOG_FOLDER_PATH, self.filename), "a")
+			fd = open(os.path.join(self.pwd, self.__output_folder, self.filename), "a")
 			if fd.writable():
 				fd.write(message)
 				fd.flush()
