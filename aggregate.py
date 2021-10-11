@@ -169,7 +169,7 @@ class Aggerate:
 			self.deletetempfiles(timelaps)
 
 	def writeQueryTimeData(self, filename:str, pattern:str, data:dict, lastcdrtime:datetime, totempfile:bool = False):
-		filename = filename.replace("[KIND]", const.QUERY_TIME_KEY if totempfile else self.querytimetitle)
+		filename = filename.replace("[TYPE]", const.QUERY_TIME_KEY if totempfile else self.querytimetitle)
 		fd = None
 		try:
 			fileContent = ""
@@ -199,7 +199,7 @@ class Aggerate:
 				fd.close()
 
 	def writeCauseCodeData(self, filename:str, pattern:str, data:dict, lastcdrtime:datetime, totempfile:bool = False):
-		filename = filename.replace("[KIND]", const.CAUSE_CODE_KEY if totempfile else self.causecodetitle)
+		filename = filename.replace("[TYPE]", const.CAUSE_CODE_KEY if totempfile else self.causecodetitle)
 		fd = None
 		try:
 			fileContent = ""
@@ -225,7 +225,7 @@ class Aggerate:
 				fd.close()
 
 	def writeCPSMetricData(self, filename:str, pattern:str, data:dict, lastcdrtime:datetime, totempfile:bool = False):
-		filename = filename.replace("[KIND]", const.CPS_METRIC_KEY if totempfile else self.cpsmetrictitle)
+		filename = filename.replace("[TYPE]", const.CPS_METRIC_KEY if totempfile else self.cpsmetrictitle)
 		fd = None
 		try:
 			fileContent = ""
@@ -394,7 +394,7 @@ class Aggerate:
 			filename = self.parsefilenameprefix(path, const.TMP_FILE_NAME_PATTERN, key.replace("-", "").replace(":", ""))
 			for kind in kinds:
 				try:
-					path = filename.replace('[KIND]', kind) 
+					path = filename.replace('[TYPE]', kind)
 					if os.path.exists(path) and os.path.isfile(path):
 						os.remove(path)        
 				except Exception as ex:
